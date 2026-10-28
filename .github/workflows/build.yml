@@ -49,7 +49,7 @@ jobs:
               <intent><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LEANBACK_LAUNCHER"/></intent>
               <intent><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent>
             </queries>
-            <application android:label="شاشة" android:icon="@drawable/banner" android:banner="@drawable/banner" android:usesCleartextTraffic="false" android:hardwareAccelerated="true">
+            <application android:label="Ø´Ø§Ø´Ø©" android:icon="@drawable/banner" android:banner="@drawable/banner" android:usesCleartextTraffic="false" android:hardwareAccelerated="true">
               <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTask"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                 android:screenOrientation="landscape"
@@ -120,7 +120,7 @@ jobs:
           public class MainActivity extends Activity {
             WebView web;
             final LruCache<String, byte[]> iconCache = new LruCache<String, byte[]>(200);
-            /* كاش لقائمة التطبيقات: تُقرأ مرة واحدة وتُحدّث فقط عند تثبيت/حذف تطبيق */
+            /* ÙƒØ§Ø´ Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª: ØªÙÙ‚Ø±Ø£ Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø© ÙˆØªÙØ­Ø¯Ù‘Ø« ÙÙ‚Ø· Ø¹Ù†Ø¯ ØªØ«Ø¨ÙŠØª/Ø­Ø°Ù ØªØ·Ø¨ÙŠÙ‚ */
             volatile List<String[]> appCache = null;   /* {pkg, label, activity, labelLower} */
             volatile boolean pkgDirty = false;
             synchronized List<String[]> allApps() {
@@ -147,7 +147,7 @@ jobs:
               return list;
             }
 
-            /* ---------- البحث عن تطبيق بالاسم ---------- */
+            /* ---------- Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† ØªØ·Ø¨ÙŠÙ‚ Ø¨Ø§Ù„Ø§Ø³Ù… ---------- */
             String[] find(String q) {
               String[] keys = q.toLowerCase().split("\\|");
               for (String[] a : allApps()) {
@@ -165,7 +165,7 @@ jobs:
               return i;
             }
 
-            /* ---------- رسم أيقونة التطبيق (مربعة بدون قناع) ---------- */
+            /* ---------- Ø±Ø³Ù… Ø£ÙŠÙ‚ÙˆÙ†Ø© Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ (Ù…Ø±Ø¨Ø¹Ø© Ø¨Ø¯ÙˆÙ† Ù‚Ù†Ø§Ø¹) ---------- */
             byte[] iconBytes(String pkg) {
               byte[] cached = iconCache.get(pkg);
               if (cached != null) return cached;
@@ -196,9 +196,9 @@ jobs:
               }
             }
 
-            /* ---------- الجسر بين الواجهة وأندرويد ---------- */
+            /* ---------- Ø§Ù„Ø¬Ø³Ø± Ø¨ÙŠÙ† Ø§Ù„ÙˆØ§Ø¬Ù‡Ø© ÙˆØ£Ù†Ø¯Ø±ÙˆÙŠØ¯ ---------- */
             class Bridge {
-              /* يرجّع اسم الحزمة إن كان التطبيق مثبتاً، وإلا نص فارغ */
+              /* ÙŠØ±Ø¬Ù‘Ø¹ Ø§Ø³Ù… Ø§Ù„Ø­Ø²Ù…Ø© Ø¥Ù† ÙƒØ§Ù† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ù…Ø«Ø¨ØªØ§Ù‹ØŒ ÙˆØ¥Ù„Ø§ Ù†Øµ ÙØ§Ø±Øº */
               @JavascriptInterface
               public String resolve(String q) {
                 try {
@@ -214,7 +214,7 @@ jobs:
                 return "";
               }
 
-              /* قائمة كل التطبيقات */
+              /* Ù‚Ø§Ø¦Ù…Ø© ÙƒÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª */
               @JavascriptInterface
               public String apps() {
                 JSONArray arr = new JSONArray();
@@ -233,7 +233,7 @@ jobs:
                 return arr.toString();
               }
 
-              /* منافذ HDMI */
+              /* Ù…Ù†Ø§ÙØ° HDMI */
               @JavascriptInterface
               public String inputs() {
                 JSONArray arr = new JSONArray();
@@ -297,9 +297,9 @@ jobs:
                       i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                       startActivity(i);
                       overridePendingTransition(0, 0);
-                    } else Toast.makeText(MainActivity.this, "غير موجود", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(MainActivity.this, "ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯", Toast.LENGTH_SHORT).show();
                   } catch (Throwable e) {
-                    Toast.makeText(MainActivity.this, "تعذر الفتح", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "ØªØ¹Ø°Ø± Ø§Ù„ÙØªØ­", Toast.LENGTH_SHORT).show();
                   }
                 }});
               }
@@ -331,7 +331,7 @@ jobs:
               web.setOverScrollMode(View.OVER_SCROLL_NEVER);
               web.setVerticalScrollBarEnabled(false);
               web.setHorizontalScrollBarEnabled(false);
-              /* تحديث الكاش فقط عند تثبيت أو حذف تطبيق */
+              /* ØªØ­Ø¯ÙŠØ« Ø§Ù„ÙƒØ§Ø´ ÙÙ‚Ø· Ø¹Ù†Ø¯ ØªØ«Ø¨ÙŠØª Ø£Ùˆ Ø­Ø°Ù ØªØ·Ø¨ÙŠÙ‚ */
               IntentFilter pf = new IntentFilter();
               pf.addAction(Intent.ACTION_PACKAGE_ADDED);
               pf.addAction(Intent.ACTION_PACKAGE_REMOVED);
@@ -403,13 +403,13 @@ jobs:
           cat > app/src/main/assets/index.html <<'EOF'
           <!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
           <meta name="viewport" content="width=device-width,initial-scale=1">
-          <title>شاشة</title>
+          <title>Ø´Ø§Ø´Ø©</title>
           <style>
           *{box-sizing:border-box;margin:0;padding:0}
           html,body{height:100%;overflow:hidden;background:#0b0f1a;color:#fff;font-family:'Noto Sans Arabic','Noto Naskh Arabic','Roboto',sans-serif;-webkit-font-smoothing:antialiased}
           button{font-family:inherit;color:inherit}
 
-          /* ===== الخلفيات (صور حقيقية 4K) ===== */
+          /* ===== Ø§Ù„Ø®Ù„ÙÙŠØ§Øª (ØµÙˆØ± Ø­Ù‚ÙŠÙ‚ÙŠØ© 4K) ===== */
           #bg{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(120% 120% at 70% 20%,#27406b,#0b0f1a 70%)}
           .bgl{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;transform:translateZ(0)}
           .bgl.on{opacity:1}
@@ -418,12 +418,12 @@ jobs:
            linear-gradient(0deg,rgba(0,0,0,.62) 0,rgba(0,0,0,.18) 34%,rgba(0,0,0,0) 56%)}
           #credit{position:fixed;left:1.4vw;bottom:.6vw;font-size:.9vw;opacity:.55;direction:ltr;text-shadow:0 1px 3px rgba(0,0,0,.7)}
 
-          /* ===== زجاج ===== */
-          /* زجاج خفيف: بدون blur (أثقل شيء على معالج التلفاز) */
+          /* ===== Ø²Ø¬Ø§Ø¬ ===== */
+          /* Ø²Ø¬Ø§Ø¬ Ø®ÙÙŠÙ: Ø¨Ø¯ÙˆÙ† blur (Ø£Ø«Ù‚Ù„ Ø´ÙŠØ¡ Ø¹Ù„Ù‰ Ù…Ø¹Ø§Ù„Ø¬ Ø§Ù„ØªÙ„ÙØ§Ø²) */
           .glass{background:linear-gradient(145deg,rgba(40,48,70,.62),rgba(15,20,34,.55));
            border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
 
-          /* ===== التخطيط ===== */
+          /* ===== Ø§Ù„ØªØ®Ø·ÙŠØ· ===== */
           .page{position:fixed;top:0;left:0;right:0;bottom:0;padding:2.2vw 4vw 2vw;display:flex;flex-direction:column;justify-content:space-between}
           .top,.mid{display:flex;justify-content:space-between}
           .top{align-items:flex-start}
@@ -441,7 +441,7 @@ jobs:
           .card{width:33vw;border-radius:2.2vw;padding:1.8vw 2vw}
           #ayah{font-size:2.3vw;line-height:1.9;margin:.8vw 0;font-family:'Noto Naskh Arabic','Amiri',serif}
 
-          /* شريط الصلاة */
+          /* Ø´Ø±ÙŠØ· Ø§Ù„ØµÙ„Ø§Ø© */
           .strip{display:flex;align-items:center;justify-content:space-between;border-radius:2.4vw;padding:.9vw 2.2vw;margin:0 auto 1.4vw;width:92vw}
           .pr{display:flex}.pr .pt{margin:0 .4vw}
           .pt{text-align:center;padding:.35vw 1vw;border-radius:1.2vw;font-size:1.55vw;min-width:7vw}
@@ -451,7 +451,7 @@ jobs:
           #ram{text-align:center}
           #ram .big{font-size:2.4vw}
 
-          /* ===== الدوك (أيقونات زجاجية بأسلوب الآيفون) ===== */
+          /* ===== Ø§Ù„Ø¯ÙˆÙƒ (Ø£ÙŠÙ‚ÙˆÙ†Ø§Øª Ø²Ø¬Ø§Ø¬ÙŠØ© Ø¨Ø£Ø³Ù„ÙˆØ¨ Ø§Ù„Ø¢ÙŠÙÙˆÙ†) ===== */
           .dockwrap{display:flex;justify-content:center;padding-bottom:.4vw}
           .dock{display:flex;align-items:flex-start;padding:1.1vw 1.5vw .8vw;border-radius:3.4vw}
           #apps{outline:none}
@@ -468,7 +468,7 @@ jobs:
           .t:focus .ic{border-color:#fff;background:rgba(255,255,255,.42)}
           .t:focus .lb{font-weight:700}
 
-          /* ===== النوافذ المنبثقة (HDMI + التطبيقات + الوقت) ===== */
+          /* ===== Ø§Ù„Ù†ÙˆØ§ÙØ° Ø§Ù„Ù…Ù†Ø¨Ø«Ù‚Ø© (HDMI + Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª + Ø§Ù„ÙˆÙ‚Øª) ===== */
           .ov{position:fixed;top:0;left:0;right:0;bottom:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(5,8,18,.8)}
           .ov.show{display:flex;animation:fi .12s ease-out}
           @keyframes fi{from{opacity:0}to{opacity:1}}
@@ -495,7 +495,7 @@ jobs:
           #grid .t{width:9vw;margin:0 auto}
           #grid .lb{max-width:9vw;font-size:1.2vw}
 
-          /* ضبط الوقت */
+          /* Ø¶Ø¨Ø· Ø§Ù„ÙˆÙ‚Øª */
           .tf{display:flex;align-items:center;justify-content:center}
           .tf .btn{margin:0 1vw}
           .fld{width:9vw;margin:0 .6vw;border-radius:2vw;padding:.9vw .5vw;background:linear-gradient(150deg,rgba(255,255,255,.3),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.4);outline:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;transition:transform .12s}
@@ -504,7 +504,7 @@ jobs:
           .fld .a{font-size:1.5vw;opacity:.7}
           .fld:focus{transform:scale(1.1);border-color:#fff;box-shadow:0 0 0 .26vw #fff}
 
-          /* الأذان */
+          /* Ø§Ù„Ø£Ø°Ø§Ù† */
           #adhan{display:none;position:fixed;top:0;left:0;right:0;bottom:0;align-items:center;justify-content:center;pointer-events:none;z-index:15}
           #adhan .big{background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.4);border-radius:2.4vw;padding:2.4vw 5vw;font-size:3.6vw}
           </style></head><body>
@@ -514,11 +514,11 @@ jobs:
           <div class="page">
             <div class="top">
               <div><div id="hj"></div><div class="sm" id="gr"></div><div id="hello"></div></div>
-              <div class="wx"><div id="temp">--°</div><div class="sm" id="cond"></div><div class="sm" id="hl"></div><div class="sm" id="city"></div></div>
+              <div class="wx"><div id="temp">--Â°</div><div class="sm" id="cond"></div><div class="sm" id="hl"></div><div class="sm" id="city"></div></div>
             </div>
             <div class="mid">
               <div class="clock"><div id="time">--:--</div><div id="ampm"></div><div id="tsrc"></div></div>
-              <div class="card glass"><div class="sm">آية اليوم</div><div id="ayah"></div><div class="sm" id="sura"></div></div>
+              <div class="card glass"><div class="sm">Ø¢ÙŠØ© Ø§Ù„ÙŠÙˆÙ…</div><div id="ayah"></div><div class="sm" id="sura"></div></div>
             </div>
             <div>
               <div class="strip glass"><div id="nx"></div><div class="pr" id="list"></div><div id="ram"></div></div>
@@ -529,40 +529,40 @@ jobs:
           <div id="adhan"></div>
 
           <div class="ov" id="ovHdmi"><div class="sheet glass">
-            <h2>مصادر HDMI</h2><p>اختر المنفذ الذي تريد التبديل إليه</p>
+            <h2>Ù…ØµØ§Ø¯Ø± HDMI</h2><p>Ø§Ø®ØªØ± Ø§Ù„Ù…Ù†ÙØ° Ø§Ù„Ø°ÙŠ ØªØ±ÙŠØ¯ Ø§Ù„ØªØ¨Ø¯ÙŠÙ„ Ø¥Ù„ÙŠÙ‡</p>
             <div class="ports" id="ports"></div>
-            <div class="hint">زر الرجوع للإغلاق</div>
+            <div class="hint">Ø²Ø± Ø§Ù„Ø±Ø¬ÙˆØ¹ Ù„Ù„Ø¥ØºÙ„Ø§Ù‚</div>
           </div></div>
 
           <div class="ov" id="ovApps"><div class="sheet glass">
-            <h2>كل التطبيقات</h2><p id="appcount"></p>
+            <h2>ÙƒÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª</h2><p id="appcount"></p>
             <div id="grid"></div>
           </div></div>
 
           <div class="ov" id="ovTime"><div class="sheet glass">
-            <h2>ضبط التاريخ والوقت</h2><p>يمين / يسار للتنقل، أعلى / أسفل لتغيير القيمة، ثم اضغط حفظ (التوقيت: السعودية)</p>
+            <h2>Ø¶Ø¨Ø· Ø§Ù„ØªØ§Ø±ÙŠØ® ÙˆØ§Ù„ÙˆÙ‚Øª</h2><p>ÙŠÙ…ÙŠÙ† / ÙŠØ³Ø§Ø± Ù„Ù„ØªÙ†Ù‚Ù„ØŒ Ø£Ø¹Ù„Ù‰ / Ø£Ø³ÙÙ„ Ù„ØªØºÙŠÙŠØ± Ø§Ù„Ù‚ÙŠÙ…Ø©ØŒ Ø«Ù… Ø§Ø¶ØºØ· Ø­ÙØ¸ (Ø§Ù„ØªÙˆÙ‚ÙŠØª: Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©)</p>
             <div class="tf" id="tfields"></div>
-            <div class="hint">زر الرجوع للإغلاق</div>
+            <div class="hint">Ø²Ø± Ø§Ù„Ø±Ø¬ÙˆØ¹ Ù„Ù„Ø¥ØºÙ„Ø§Ù‚</div>
           </div></div>
 
           <script>
           var $=function(i){return document.getElementById(i)};
           var AND=window.Android||null;
 
-          /* ================== الإعدادات (عدّلها هنا) ================== */
-          var LAT=31.33,LON=37.34,CITY='القريات',TZ='Asia/Riyadh';
-          var TZOFF=3*36e5;             /* توقيت السعودية UTC+3 (ثابت بدون توقيت صيفي) */
-          var BG_SECONDS=45;            /* مدة كل خلفية */
-          var BG_W=1920,BG_H=1080;      /* Full HD: أخف ٤ مرات من 4K وبنفس الوضوح على شاشة التلفاز */
+          /* ================== Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª (Ø¹Ø¯Ù‘Ù„Ù‡Ø§ Ù‡Ù†Ø§) ================== */
+          var LAT=31.33,LON=37.34,CITY='Ø§Ù„Ù‚Ø±ÙŠØ§Øª',TZ='Asia/Riyadh';
+          var TZOFF=3*36e5;             /* ØªÙˆÙ‚ÙŠØª Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ© UTC+3 (Ø«Ø§Ø¨Øª Ø¨Ø¯ÙˆÙ† ØªÙˆÙ‚ÙŠØª ØµÙŠÙÙŠ) */
+          var BG_SECONDS=45;            /* Ù…Ø¯Ø© ÙƒÙ„ Ø®Ù„ÙÙŠØ© */
+          var BG_W=1920,BG_H=1080;      /* Full HD: Ø£Ø®Ù Ù¤ Ù…Ø±Ø§Øª Ù…Ù† 4K ÙˆØ¨Ù†ÙØ³ Ø§Ù„ÙˆØ¶ÙˆØ­ Ø¹Ù„Ù‰ Ø´Ø§Ø´Ø© Ø§Ù„ØªÙ„ÙØ§Ø² */
           var RAMADAN=new Date(Date.UTC(2027,1,8));
-          /* وقت بناء التطبيق (يُستبدل تلقائياً أثناء البناء) - يُستخدم كحد أدنى للوقت الصحيح */
+          /* ÙˆÙ‚Øª Ø¨Ù†Ø§Ø¡ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ (ÙŠÙØ³ØªØ¨Ø¯Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø¨Ù†Ø§Ø¡) - ÙŠÙØ³ØªØ®Ø¯Ù… ÙƒØ­Ø¯ Ø£Ø¯Ù†Ù‰ Ù„Ù„ÙˆÙ‚Øª Ø§Ù„ØµØ­ÙŠØ­ */
           var BUILD_TS=Number('__BUILD_TS__')||0;
-          /* صور واقعية عالية الجودة من Unsplash (إن تعطّلت صورة يتم تخطيها تلقائياً) */
+          /* ØµÙˆØ± ÙˆØ§Ù‚Ø¹ÙŠØ© Ø¹Ø§Ù„ÙŠØ© Ø§Ù„Ø¬ÙˆØ¯Ø© Ù…Ù† Unsplash (Ø¥Ù† ØªØ¹Ø·Ù‘Ù„Øª ØµÙˆØ±Ø© ÙŠØªÙ… ØªØ®Ø·ÙŠÙ‡Ø§ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹) */
           var PHOTO_IDS=['photo-1506744038136-46273834b3fb','photo-1469474968028-56623f02e42e','photo-1441974231531-c6227db76b6e','photo-1507525428034-b723cf961d3e','photo-1470071459604-3b5ec3a7fe05','photo-1464822759023-fed622ff2c3b','photo-1501785888041-af3ef285b470','photo-1472214103451-9374bd1c798e','photo-1500530855697-b586d89ba3ee','photo-1519681393784-d120267933ba','photo-1476514525535-07fb3b4ae5f1','photo-1433086966358-54859d0ed716','photo-1509316785289-025f5b846b35','photo-1473580044384-7ba9967e16a0','photo-1518837695005-2083093ee35b','photo-1505118380757-91f5f5632de0','photo-1419242902214-272b3f66ee7a','photo-1447752875215-b2761acb3c5d','photo-1502082553048-f009c37129b9'];
           var BACKUP_SEEDS=['shasha1','shasha2','shasha3','shasha4','shasha5','shasha6'];
 
-          /* ================== أدوات ================== */
-          var AR='٠١٢٣٤٥٦٧٨٩';
+          /* ================== Ø£Ø¯ÙˆØ§Øª ================== */
+          var AR='Ù Ù¡Ù¢Ù£Ù¤Ù¥Ù¦Ù§Ù¨Ù©';
           function ar(x){return String(x).replace(/\d/g,function(d){return AR[d]})}
           function z(x){return(x<10?'0':'')+x}
           function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -570,16 +570,16 @@ jobs:
           function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
           function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
 
-          /* ================== الساعة الموثوقة (تعمل بدون إنترنت) ==================
-             التلفزيون لا يملك بطارية ساعة، فبعد الفصل بدون إنترنت يرجع لتاريخ قديم.
-             الحل: نحفظ آخر وقت صحيح، ونستخدم OFF لتصحيح ساعة النظام، ونحسب كل شيء بتوقيت السعودية. */
+          /* ================== Ø§Ù„Ø³Ø§Ø¹Ø© Ø§Ù„Ù…ÙˆØ«ÙˆÙ‚Ø© (ØªØ¹Ù…Ù„ Ø¨Ø¯ÙˆÙ† Ø¥Ù†ØªØ±Ù†Øª) ==================
+             Ø§Ù„ØªÙ„ÙØ²ÙŠÙˆÙ† Ù„Ø§ ÙŠÙ…Ù„Ùƒ Ø¨Ø·Ø§Ø±ÙŠØ© Ø³Ø§Ø¹Ø©ØŒ ÙØ¨Ø¹Ø¯ Ø§Ù„ÙØµÙ„ Ø¨Ø¯ÙˆÙ† Ø¥Ù†ØªØ±Ù†Øª ÙŠØ±Ø¬Ø¹ Ù„ØªØ§Ø±ÙŠØ® Ù‚Ø¯ÙŠÙ….
+             Ø§Ù„Ø­Ù„: Ù†Ø­ÙØ¸ Ø¢Ø®Ø± ÙˆÙ‚Øª ØµØ­ÙŠØ­ØŒ ÙˆÙ†Ø³ØªØ®Ø¯Ù… OFF Ù„ØªØµØ­ÙŠØ­ Ø³Ø§Ø¹Ø© Ø§Ù„Ù†Ø¸Ø§Ù…ØŒ ÙˆÙ†Ø­Ø³Ø¨ ÙƒÙ„ Ø´ÙŠØ¡ Ø¨ØªÙˆÙ‚ÙŠØª Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©. */
           var OFF=0,synced=false,manual=false;
           function nowMs(){return Date.now()+OFF}
-          function wall(){return new Date(nowMs()+TZOFF)}   /* استخدم getUTC* للقراءة */
+          function wall(){return new Date(nowMs()+TZOFF)}   /* Ø§Ø³ØªØ®Ø¯Ù… getUTC* Ù„Ù„Ù‚Ø±Ø§Ø¡Ø© */
           function saveClock(){sv('lastTrue',String(nowMs()))}
           (function(){
             var floor=Math.max(BUILD_TS,+ld('lastTrue')||0),sys=Date.now();
-            OFF=sys<floor?floor-sys:0;   /* إن كانت ساعة النظام أقدم من آخر وقت معروف فهي خاطئة */
+            OFF=sys<floor?floor-sys:0;   /* Ø¥Ù† ÙƒØ§Ù†Øª Ø³Ø§Ø¹Ø© Ø§Ù„Ù†Ø¸Ø§Ù… Ø£Ù‚Ø¯Ù… Ù…Ù† Ø¢Ø®Ø± ÙˆÙ‚Øª Ù…Ø¹Ø±ÙˆÙ ÙÙ‡ÙŠ Ø®Ø§Ø·Ø¦Ø© */
           })();
           var TS=[
             function(){return fetch('https://worldtimeapi.org/api/timezone/Etc/UTC').then(function(r){return r.json()}).then(function(j){return j.unixtime*1000})},
@@ -598,8 +598,8 @@ jobs:
               }).catch(next)
             })()}
 
-          /* ================== التاريخ الهجري (حساب محلي) ================== */
-          var HM=['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+          /* ================== Ø§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ù‡Ø¬Ø±ÙŠ (Ø­Ø³Ø§Ø¨ Ù…Ø­Ù„ÙŠ) ================== */
+          var HM=['Ù…Ø­Ø±Ù…','ØµÙØ±','Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø£ÙˆÙ„','Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø¢Ø®Ø±','Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø£ÙˆÙ„Ù‰','Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø¢Ø®Ø±Ø©','Ø±Ø¬Ø¨','Ø´Ø¹Ø¨Ø§Ù†','Ø±Ù…Ø¶Ø§Ù†','Ø´ÙˆØ§Ù„','Ø°Ùˆ Ø§Ù„Ù‚Ø¹Ø¯Ø©','Ø°Ùˆ Ø§Ù„Ø­Ø¬Ø©'];
           function toHijri(y,m,d){
             var jd=Math.floor(Date.UTC(y,m-1,d)/864e5)+2440588;
             var l=jd-1948440+10632,n=Math.floor((l-1)/10631);
@@ -609,7 +609,7 @@ jobs:
             var mo=Math.floor(24*l/709),dd=l-Math.floor(709*mo/24);
             return{day:dd,month:mo,year:30*n+j-30}}
 
-          /* ================== أوقات الصلاة (حساب محلي - أم القرى) ================== */
+          /* ================== Ø£ÙˆÙ‚Ø§Øª Ø§Ù„ØµÙ„Ø§Ø© (Ø­Ø³Ø§Ø¨ Ù…Ø­Ù„ÙŠ - Ø£Ù… Ø§Ù„Ù‚Ø±Ù‰) ================== */
           function hm(h){h=((h%24)+24)%24;var m=Math.round(h*60);return z(Math.floor(m/60)%24)+':'+z(m%60)}
           function calcPrayer(d,ram){
             var R=Math.PI/180,jd=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),9)/864e5+2440587.5,n=jd-2451545.0;
@@ -625,7 +625,7 @@ jobs:
             var mag=noon+ang(0.833);
             return{Fajr:hm(noon-ang(18.5)),Dhuhr:hm(noon),Asr:hm(noon+ang(asrA)),Maghrib:hm(mag),Isha:hm(mag+(ram?2:1.5))}}
 
-          /* ================== الخلفيات ================== */
+          /* ================== Ø§Ù„Ø®Ù„ÙÙŠØ§Øª ================== */
           var URLS=[],BK=[],bi=0,bcur=0,bfails=0,bnext=null,btimer=null,bgLayers=[$('bgA'),$('bgB')];
           function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
           URLS=shuffle(PHOTO_IDS.slice()).map(function(id){return'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w='+BG_W+'&h='+BG_H+'&q=72'});
@@ -654,14 +654,14 @@ jobs:
           function startBg(){prepareNext();showBg()}
           window.addEventListener('online',function(){bfails=0;if(bnext&&!bnext.ready)prepareNext();syncTime();prayer();weather()});
 
-          /* ================== بيانات اليوم ================== */
-          var P=[['Fajr','الفجر'],['Dhuhr','الظهر'],['Asr','العصر'],['Maghrib','المغرب'],['Isha','العشاء']],T=null,H=null,cur='',curDay='';
-          var DY=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-          var MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-          var AY=[["وَقُل رَّبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ","سورة المؤمنون ٩٧"],["أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ","سورة الرعد ٢٨"],["فَإِنَّ مَعَ الْعُسْرِ يُسْرًا","سورة الشرح ٥"],["وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ","سورة الطلاق ٣"],["رَبِّ اشْرَحْ لِي صَدْرِي","سورة طه ٢٥"],["إِنَّ اللَّهَ مَعَ الصَّابِرِينَ","سورة البقرة ١٥٣"],["وَقُل رَّبِّ زِدْنِي عِلْمًا","سورة طه ١١٤"]];
+          /* ================== Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„ÙŠÙˆÙ… ================== */
+          var P=[['Fajr','Ø§Ù„ÙØ¬Ø±'],['Dhuhr','Ø§Ù„Ø¸Ù‡Ø±'],['Asr','Ø§Ù„Ø¹ØµØ±'],['Maghrib','Ø§Ù„Ù…ØºØ±Ø¨'],['Isha','Ø§Ù„Ø¹Ø´Ø§Ø¡']],T=null,H=null,cur='',curDay='';
+          var DY=['Ø§Ù„Ø£Ø­Ø¯','Ø§Ù„Ø§Ø«Ù†ÙŠÙ†','Ø§Ù„Ø«Ù„Ø§Ø«Ø§Ø¡','Ø§Ù„Ø£Ø±Ø¨Ø¹Ø§Ø¡','Ø§Ù„Ø®Ù…ÙŠØ³','Ø§Ù„Ø¬Ù…Ø¹Ø©','Ø§Ù„Ø³Ø¨Øª'];
+          var MN=['ÙŠÙ†Ø§ÙŠØ±','ÙØ¨Ø±Ø§ÙŠØ±','Ù…Ø§Ø±Ø³','Ø£Ø¨Ø±ÙŠÙ„','Ù…Ø§ÙŠÙˆ','ÙŠÙˆÙ†ÙŠÙˆ','ÙŠÙˆÙ„ÙŠÙˆ','Ø£ØºØ³Ø·Ø³','Ø³Ø¨ØªÙ…Ø¨Ø±','Ø£ÙƒØªÙˆØ¨Ø±','Ù†ÙˆÙÙ…Ø¨Ø±','Ø¯ÙŠØ³Ù…Ø¨Ø±'];
+          var AY=[["ÙˆÙŽÙ‚ÙÙ„ Ø±ÙŽÙ‘Ø¨ÙÙ‘ Ø£ÙŽØ¹ÙÙˆØ°Ù Ø¨ÙÙƒÙŽ Ù…ÙÙ†Ù’ Ù‡ÙŽÙ…ÙŽØ²ÙŽØ§ØªÙ Ø§Ù„Ø´ÙŽÙ‘ÙŠÙŽØ§Ø·ÙÙŠÙ†Ù","Ø³ÙˆØ±Ø© Ø§Ù„Ù…Ø¤Ù…Ù†ÙˆÙ† Ù©Ù§"],["Ø£ÙŽÙ„ÙŽØ§ Ø¨ÙØ°ÙÙƒÙ’Ø±Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù ØªÙŽØ·Ù’Ù…ÙŽØ¦ÙÙ†ÙÙ‘ Ø§Ù„Ù’Ù‚ÙÙ„ÙÙˆØ¨Ù","Ø³ÙˆØ±Ø© Ø§Ù„Ø±Ø¹Ø¯ Ù¢Ù¨"],["ÙÙŽØ¥ÙÙ†ÙŽÙ‘ Ù…ÙŽØ¹ÙŽ Ø§Ù„Ù’Ø¹ÙØ³Ù’Ø±Ù ÙŠÙØ³Ù’Ø±Ù‹Ø§","Ø³ÙˆØ±Ø© Ø§Ù„Ø´Ø±Ø­ Ù¥"],["ÙˆÙŽÙ…ÙŽÙ† ÙŠÙŽØªÙŽÙˆÙŽÙƒÙŽÙ‘Ù„Ù’ Ø¹ÙŽÙ„ÙŽÙ‰ Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù ÙÙŽÙ‡ÙÙˆÙŽ Ø­ÙŽØ³Ù’Ø¨ÙÙ‡Ù","Ø³ÙˆØ±Ø© Ø§Ù„Ø·Ù„Ø§Ù‚ Ù£"],["Ø±ÙŽØ¨ÙÙ‘ Ø§Ø´Ù’Ø±ÙŽØ­Ù’ Ù„ÙÙŠ ØµÙŽØ¯Ù’Ø±ÙÙŠ","Ø³ÙˆØ±Ø© Ø·Ù‡ Ù¢Ù¥"],["Ø¥ÙÙ†ÙŽÙ‘ Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙŽ Ù…ÙŽØ¹ÙŽ Ø§Ù„ØµÙŽÙ‘Ø§Ø¨ÙØ±ÙÙŠÙ†ÙŽ","Ø³ÙˆØ±Ø© Ø§Ù„Ø¨Ù‚Ø±Ø© Ù¡Ù¥Ù£"],["ÙˆÙŽÙ‚ÙÙ„ Ø±ÙŽÙ‘Ø¨ÙÙ‘ Ø²ÙØ¯Ù’Ù†ÙÙŠ Ø¹ÙÙ„Ù’Ù…Ù‹Ø§","Ø³ÙˆØ±Ø© Ø·Ù‡ Ù¡Ù¡Ù¤"]];
           $('city').textContent=CITY;
           function dayKey(d){return d.getUTCFullYear()+'-'+(d.getUTCMonth()+1)+'-'+d.getUTCDate()}
-          /* تجهيز بيانات اليوم: من الذاكرة إن كانت لليوم نفسه، وإلا حساب محلي */
+          /* ØªØ¬Ù‡ÙŠØ² Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„ÙŠÙˆÙ…: Ù…Ù† Ø§Ù„Ø°Ø§ÙƒØ±Ø© Ø¥Ù† ÙƒØ§Ù†Øª Ù„Ù„ÙŠÙˆÙ… Ù†ÙØ³Ù‡ØŒ ÙˆØ¥Ù„Ø§ Ø­Ø³Ø§Ø¨ Ù…Ø­Ù„ÙŠ */
           function prep(d){
             var k=dayKey(d);
             if(k===curDay)return;
@@ -672,34 +672,34 @@ jobs:
             H=(ok&&c.H)?c.H:{day:lh.day,month:{ar:HM[lh.month-1]},year:lh.year};
             T=(ok&&c.T)?c.T:calcPrayer(d,lh.month===9);
             var a=AY[Math.floor((nowMs()+TZOFF)/864e5)%AY.length];
-            $('ayah').textContent='﴿'+a[0]+'﴾';$('sura').textContent=a[1];
+            $('ayah').textContent='ï´¿'+a[0]+'ï´¾';$('sura').textContent=a[1];
             cur='';lastMin=-1}
           function at(s,add){var d=wall(),p=String(s).slice(0,5).split(':');d.setUTCHours(+p[0],+p[1],0,0);d.setUTCDate(d.getUTCDate()+add);return d}
-          function f12(s){var p=String(s).slice(0,5).split(':'),h=+p[0];return ar((h%12||12)+':'+p[1])+(h<12?' ص':' م')}
-          function hello(h){return h<5?'ليلة سعيدة':h<12?'صباح الخير':h<17?'طاب يومك':h<20?'مساء الخير':'مساء النور'}
+          function f12(s){var p=String(s).slice(0,5).split(':'),h=+p[0];return ar((h%12||12)+':'+p[1])+(h<12?' Øµ':' Ù…')}
+          function hello(h){return h<5?'Ù„ÙŠÙ„Ø© Ø³Ø¹ÙŠØ¯Ø©':h<12?'ØµØ¨Ø§Ø­ Ø§Ù„Ø®ÙŠØ±':h<17?'Ø·Ø§Ø¨ ÙŠÙˆÙ…Ùƒ':h<20?'Ù…Ø³Ø§Ø¡ Ø§Ù„Ø®ÙŠØ±':'Ù…Ø³Ø§Ø¡ Ø§Ù„Ù†ÙˆØ±'}
           var lastMin=-1;
           function tick(){
             var d=wall();prep(d);
             var h=d.getUTCHours(),m=d.getUTCMinutes();
             if(m!==lastMin){lastMin=m;saveClock();
-              $('time').textContent=ar((h%12||12)+':'+z(m));$('ampm').textContent=h<12?'ص':'م';
-              $('tsrc').textContent=(!synced&&!manual&&OFF!==0)?'⚠ الوقت تقديري (لا يوجد إنترنت) — اضبطه من زر الوقت':'';
+              $('time').textContent=ar((h%12||12)+':'+z(m));$('ampm').textContent=h<12?'Øµ':'Ù…';
+              $('tsrc').textContent=(!synced&&!manual&&OFF!==0)?'âš  Ø§Ù„ÙˆÙ‚Øª ØªÙ‚Ø¯ÙŠØ±ÙŠ (Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø¥Ù†ØªØ±Ù†Øª) â€” Ø§Ø¶Ø¨Ø·Ù‡ Ù…Ù† Ø²Ø± Ø§Ù„ÙˆÙ‚Øª':'';
               $('gr').textContent=ar(d.getUTCDate())+' '+MN[d.getUTCMonth()]+' '+ar(d.getUTCFullYear());
-              $('hj').textContent=DY[d.getUTCDay()]+(H?'، '+ar(H.day)+' '+H.month.ar+' '+ar(H.year)+' هـ':'');
+              $('hj').textContent=DY[d.getUTCDay()]+(H?'ØŒ '+ar(H.day)+' '+H.month.ar+' '+ar(H.year)+' Ù‡Ù€':'');
               $('hello').textContent=hello(h);
               var r=Math.ceil((RAMADAN-d)/864e5);
-              $('ram').innerHTML=r>0?'<div class="sm">رمضان ١٤٤٨</div><div class="big">'+ar(r)+' يوم</div>':''}
+              $('ram').innerHTML=r>0?'<div class="sm">Ø±Ù…Ø¶Ø§Ù† Ù¡Ù¤Ù¤Ù¨</div><div class="big">'+ar(r)+' ÙŠÙˆÙ…</div>':''}
             if(!T)return;
             var nx=null,ad=null;
             for(var k=0;k<5;k++){var tt=at(T[P[k][0]],0);if(d>=tt&&d-tt<12e4)ad=P[k][1]}
             if(ad!==lastAd){lastAd=ad;$('adhan').style.display=ad?'flex':'none';
-              if(ad)$('adhan').innerHTML='<div class="big">حان الآن موعد أذان '+ad+'</div>'}
+              if(ad)$('adhan').innerHTML='<div class="big">Ø­Ø§Ù† Ø§Ù„Ø¢Ù† Ù…ÙˆØ¹Ø¯ Ø£Ø°Ø§Ù† '+ad+'</div>'}
             for(var i=0;i<5;i++){var t=at(T[P[i][0]],0);if(t>d){nx=[P[i][1],t];break}}
             if(!nx)nx=[P[0][1],at(T.Fajr,1)];
             var s=Math.floor((nx[1]-d)/1000);
-            if(!nxName){$('nx').innerHTML='<div class="sm">الصلاة القادمة</div><div class="big"></div><div class="sm"></div>';nxName=$('nx').children[1].firstChild||$('nx').children[1].appendChild(document.createTextNode(''));nxCnt=$('nx').children[2].appendChild(document.createTextNode(''))}
+            if(!nxName){$('nx').innerHTML='<div class="sm">Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø©</div><div class="big"></div><div class="sm"></div>';nxName=$('nx').children[1].firstChild||$('nx').children[1].appendChild(document.createTextNode(''));nxCnt=$('nx').children[2].appendChild(document.createTextNode(''))}
             if(nxName.data!==nx[0])nxName.data=nx[0];
-            nxCnt.data='بعد '+ar(z(Math.floor(s/3600))+':'+z(Math.floor(s%3600/60))+':'+z(s%60));
+            nxCnt.data='Ø¨Ø¹Ø¯ '+ar(z(Math.floor(s/3600))+':'+z(Math.floor(s%3600/60))+':'+z(s%60));
             if(cur!==nx[0]){cur=nx[0];draw()}}
           var lastAd=0,nxName=null,nxCnt=null;
           function draw(){var h='';for(var i=0;i<5;i++){h+='<div class="pt'+(P[i][1]===cur?' on':'')+'"><div class="sm">'+P[i][1]+'</div><div>'+f12(T[P[i][0]])+'</div></div>'}$('list').innerHTML=h}
@@ -709,33 +709,33 @@ jobs:
               T=j.data.timings;H=j.data.date.hijri;
               sv('ptc',JSON.stringify({k:dayKey(wall()),T:T,H:H}));
               cur='';lastMin=-1;tick()}).catch(function(){})}
-          function wc(c){if(c==0)return'صحو';if(c<3)return'غائم جزئياً';if(c==3)return'غائم';if(c==45||c==48)return'ضباب';if(c<60)return'رذاذ';if(c<70)return'مطر';if(c<80)return'ثلج';if(c<90)return'زخات مطر';return'عاصفة رعدية'}
+          function wc(c){if(c==0)return'ØµØ­Ùˆ';if(c<3)return'ØºØ§Ø¦Ù… Ø¬Ø²Ø¦ÙŠØ§Ù‹';if(c==3)return'ØºØ§Ø¦Ù…';if(c==45||c==48)return'Ø¶Ø¨Ø§Ø¨';if(c<60)return'Ø±Ø°Ø§Ø°';if(c<70)return'Ù…Ø·Ø±';if(c<80)return'Ø«Ù„Ø¬';if(c<90)return'Ø²Ø®Ø§Øª Ù…Ø·Ø±';return'Ø¹Ø§ØµÙØ© Ø±Ø¹Ø¯ÙŠØ©'}
           function showWx(w){
-            $('temp').textContent=ar(w.t)+'°';$('cond').textContent=w.c;$('hl').textContent=w.hl;
+            $('temp').textContent=ar(w.t)+'Â°';$('cond').textContent=w.c;$('hl').textContent=w.hl;
             $('temp').style.opacity=(nowMs()-w.ts>108e5)?.5:1}
           function weather(){
             fetch('https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LON+'&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto')
             .then(function(r){return r.json()}).then(function(j){
               var w={t:Math.round(j.current.temperature_2m),c:wc(j.current.weather_code),
-                hl:'↑'+ar(Math.round(j.daily.temperature_2m_max[0]))+'° ↓'+ar(Math.round(j.daily.temperature_2m_min[0]))+'°',ts:nowMs()};
+                hl:'â†‘'+ar(Math.round(j.daily.temperature_2m_max[0]))+'Â° â†“'+ar(Math.round(j.daily.temperature_2m_min[0]))+'Â°',ts:nowMs()};
               sv('wx',JSON.stringify(w));showWx(w)}).catch(function(){})}
           try{var w0=JSON.parse(ld('wx')||'null');if(w0)showWx(w0)}catch(e){}
 
-          /* ================== الدوك ================== */
+          /* ================== Ø§Ù„Ø¯ÙˆÙƒ ================== */
           var GEAR='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.6" fill="none" stroke="#fff" stroke-width="2"/><path d="M12 2.8l1.5 2.4 2.8-.6.9 2.7 2.7.9-.6 2.8 2.4 1.5-2.4 1.5.6 2.8-2.7.9-.9 2.7-2.8-.6L12 21.2l-1.5-2.4-2.8.6-.9-2.7-2.7-.9.6-2.8L2.3 12l2.4-1.5-.6-2.8 2.7-.9.9-2.7 2.8.6z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>';
           var HD='<svg viewBox="0 0 24 24"><path d="M3 6.5h18v7.2l-3.2 3.3H15v2H9v-2H6.2L3 13.7z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 10h10M7 12.6h10" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>';
           var GRID='<svg viewBox="0 0 24 24" fill="#fff"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>';
           var CLK='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M12 7v5.2l3.4 2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
           var DOCK=[
-            {label:'ثمانية',spec:'name:ثمانية|thmanyah',logo:'thmanyah.png'},
-            {label:'شاشا',spec:'name:شاشا|shasha',logo:'shasha.png'},
+            {label:'Ø«Ù…Ø§Ù†ÙŠØ©',spec:'name:Ø«Ù…Ø§Ù†ÙŠØ©|thmanyah',logo:'thmanyah.png'},
+            {label:'Ø´Ø§Ø´Ø§',spec:'name:Ø´Ø§Ø´Ø§|shasha',logo:'shasha.png'},
             {label:'Google Play',spec:'pkg:com.android.vending',logo:'googleplay.png'},
             {label:'YouTube',spec:'pkg:com.google.android.youtube.tv',logo:'youtube.png'},
             {label:'Netflix',spec:'pkg:com.netflix.ninja',logo:'netflix.png'},
             {label:'HDMI',act:'hdmi',svg:HD},
-            {label:'التطبيقات',act:'apps',svg:GRID},
-            {label:'الوقت',act:'time',svg:CLK},
-            {label:'الإعدادات',spec:'settings',svg:GEAR}
+            {label:'Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª',act:'apps',svg:GRID},
+            {label:'Ø§Ù„ÙˆÙ‚Øª',act:'time',svg:CLK},
+            {label:'Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª',spec:'settings',svg:GEAR}
           ];
           var lastTile=null;
           var iconVer=1;
@@ -756,7 +756,7 @@ jobs:
             if(o.svg){box.innerHTML=o.svg;return}
             var pkg=AND?AND.resolve(o.spec):'';
             b.classList.toggle('off',!!AND&&!pkg);
-            if(o.pkg===pkg&&box.firstChild)return;   /* لم يتغير شيء: لا تعيد التحميل */
+            if(o.pkg===pkg&&box.firstChild)return;   /* Ù„Ù… ÙŠØªØºÙŠØ± Ø´ÙŠØ¡: Ù„Ø§ ØªØ¹ÙŠØ¯ Ø§Ù„ØªØ­Ù…ÙŠÙ„ */
             o.pkg=pkg;
             if(o.logo){var im=new Image();im.alt='';im.decoding='async';
               im.onload=function(){box.innerHTML='';box.appendChild(im)};
@@ -777,21 +777,21 @@ jobs:
             var list=[];try{list=JSON.parse(AND?AND.inputs():'[]')||[]}catch(e){}
             var box=$('ports');box.innerHTML='';
             if(!list.length){
-              box.innerHTML='<div style="text-align:center;max-width:46vw"><div class="sm" style="font-size:1.7vw;line-height:1.8">لم يتم العثور على منافذ HDMI من النظام.<br>يمكنك فتح التلفزيون المباشر واختيار المصدر من هناك.</div><button class="btn" data-f="1" id="liveBtn">فتح التلفزيون المباشر</button></div>';
-              $('liveBtn').onclick=function(){closeOv();L('name:تلفزيون مباشر|live tv|live channels|tv')}}
+              box.innerHTML='<div style="text-align:center;max-width:46vw"><div class="sm" style="font-size:1.7vw;line-height:1.8">Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ù…Ù†Ø§ÙØ° HDMI Ù…Ù† Ø§Ù„Ù†Ø¸Ø§Ù….<br>ÙŠÙ…ÙƒÙ†Ùƒ ÙØªØ­ Ø§Ù„ØªÙ„ÙØ²ÙŠÙˆÙ† Ø§Ù„Ù…Ø¨Ø§Ø´Ø± ÙˆØ§Ø®ØªÙŠØ§Ø± Ø§Ù„Ù…ØµØ¯Ø± Ù…Ù† Ù‡Ù†Ø§Ùƒ.</div><button class="btn" data-f="1" id="liveBtn">ÙØªØ­ Ø§Ù„ØªÙ„ÙØ²ÙŠÙˆÙ† Ø§Ù„Ù…Ø¨Ø§Ø´Ø±</button></div>';
+              $('liveBtn').onclick=function(){closeOv();L('name:ØªÙ„ÙØ²ÙŠÙˆÙ† Ù…Ø¨Ø§Ø´Ø±|live tv|live channels|tv')}}
             else list.forEach(function(p){
               var c=document.createElement('button');c.className='pc'+(p.connected?' on':'');c.setAttribute('data-f','1');
-              c.innerHTML=PORT_SVG+'<div class="nm">'+esc(p.label)+'</div><div class="dv">'+esc(p.device||'')+'</div><div class="st"><span class="dot"></span>'+(p.connected?'متصل':'غير متصل')+'</div>';
+              c.innerHTML=PORT_SVG+'<div class="nm">'+esc(p.label)+'</div><div class="dv">'+esc(p.device||'')+'</div><div class="st"><span class="dot"></span>'+(p.connected?'Ù…ØªØµÙ„':'ØºÙŠØ± Ù…ØªØµÙ„')+'</div>';
               c.onclick=function(){closeOv();L('input:'+p.id)};
               box.appendChild(c)});
             showOv('ovHdmi',box.querySelector('.pc.on')||box.querySelector('[data-f]'))}
 
-          /* ================== كل التطبيقات ================== */
-          /* الشبكة تُبنى مرة واحدة فقط ثم تُعاد استخدامها (فتح فوري) */
+          /* ================== ÙƒÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª ================== */
+          /* Ø§Ù„Ø´Ø¨ÙƒØ© ØªÙØ¨Ù†Ù‰ Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø© ÙÙ‚Ø· Ø«Ù… ØªÙØ¹Ø§Ø¯ Ø§Ø³ØªØ®Ø¯Ø§Ù…Ù‡Ø§ (ÙØªØ­ ÙÙˆØ±ÙŠ) */
           var appsBuilt=false;
           function buildApps(){
             var list=[];try{list=JSON.parse(AND?AND.apps():'[]')||[]}catch(e){}
-            var g=$('grid'),fr=document.createDocumentFragment();g.innerHTML='';$('appcount').textContent=ar(list.length)+' تطبيق';
+            var g=$('grid'),fr=document.createDocumentFragment();g.innerHTML='';$('appcount').textContent=ar(list.length)+' ØªØ·Ø¨ÙŠÙ‚';
             list.forEach(function(p){
               var b=mkTile({label:p.label},function(){closeOv();L('pkg:'+p.pkg)});
               fillIcon(b.firstChild,p.pkg,p.label);fr.appendChild(b)});
@@ -801,9 +801,9 @@ jobs:
             var g=$('grid');g.scrollTop=0;
             showOv('ovApps',g.querySelector('[data-f]'))}
 
-          /* ================== ضبط الوقت يدوياً ================== */
+          /* ================== Ø¶Ø¨Ø· Ø§Ù„ÙˆÙ‚Øª ÙŠØ¯ÙˆÙŠØ§Ù‹ ================== */
           var TF=null;
-          var FL=[['y','السنة',2025,2045],['mo','الشهر',1,12],['d','اليوم',1,31],['h','الساعة',0,23],['mi','الدقيقة',0,59]];
+          var FL=[['y','Ø§Ù„Ø³Ù†Ø©',2025,2045],['mo','Ø§Ù„Ø´Ù‡Ø±',1,12],['d','Ø§Ù„ÙŠÙˆÙ…',1,31],['h','Ø§Ù„Ø³Ø§Ø¹Ø©',0,23],['mi','Ø§Ù„Ø¯Ù‚ÙŠÙ‚Ø©',0,59]];
           function dim(y,m){return new Date(Date.UTC(y,m,0)).getUTCDate()}
           function paintTf(){FL.forEach(function(f){var k=f[0];$('f_'+k).querySelector('.v').textContent=ar((k==='h'||k==='mi')?z(TF[k]):TF[k])})}
           function openTime(){
@@ -813,9 +813,9 @@ jobs:
             FL.forEach(function(f){
               var b=document.createElement('button');b.className='fld';b.id='f_'+f[0];
               b.setAttribute('data-f','1');b.setAttribute('data-k',f[0]);
-              b.innerHTML='<div class="a">▲</div><div class="v"></div><div class="a">▼</div><div class="u">'+f[1]+'</div>';
+              b.innerHTML='<div class="a">â–²</div><div class="v"></div><div class="a">â–¼</div><div class="u">'+f[1]+'</div>';
               box.appendChild(b)});
-            var s=document.createElement('button');s.className='btn';s.setAttribute('data-f','1');s.textContent='حفظ';s.onclick=saveTime;box.appendChild(s);
+            var s=document.createElement('button');s.className='btn';s.setAttribute('data-f','1');s.textContent='Ø­ÙØ¸';s.onclick=saveTime;box.appendChild(s);
             paintTf();showOv('ovTime',$('f_h'))}
           function adj(k,dir){
             var f=FL.filter(function(x){return x[0]===k})[0],mx=(k==='d')?dim(TF.y,TF.mo):f[3],v=TF[k]+dir;
@@ -827,7 +827,7 @@ jobs:
             var ms=Date.UTC(TF.y,TF.mo-1,TF.d,TF.h,TF.mi,0)-TZOFF;
             OFF=ms-Date.now();manual=true;saveClock();curDay='';closeOv();tick()}
 
-          /* ================== النوافذ + التنقل بالريموت ================== */
+          /* ================== Ø§Ù„Ù†ÙˆØ§ÙØ° + Ø§Ù„ØªÙ†Ù‚Ù„ Ø¨Ø§Ù„Ø±ÙŠÙ…ÙˆØª ================== */
           var openOvEl=null;
           function showOv(id,focusEl){openOvEl=$(id);openOvEl.classList.add('show');if(focusEl)focusEl.focus()}
           function closeOv(){
@@ -845,7 +845,7 @@ jobs:
             var els=layerItems();if(!els.length)return;
             var c=document.activeElement,ix=els.indexOf(c);
             if(ix<0){els[0].focus();return}
-            /* تنقل فوري بالحساب بدل قياس كل العناصر (الواجهة من اليمين لليسار) */
+            /* ØªÙ†Ù‚Ù„ ÙÙˆØ±ÙŠ Ø¨Ø§Ù„Ø­Ø³Ø§Ø¨ Ø¨Ø¯Ù„ Ù‚ÙŠØ§Ø³ ÙƒÙ„ Ø§Ù„Ø¹Ù†Ø§ØµØ± (Ø§Ù„ÙˆØ§Ø¬Ù‡Ø© Ù…Ù† Ø§Ù„ÙŠÙ…ÙŠÙ† Ù„Ù„ÙŠØ³Ø§Ø±) */
             var id=openOvEl?openOvEl.id:'dock',cols=id==='ovApps'?7:(id==='dock'||id==='ovTime')?els.length:0;
             if(cols){
               var j=ix+(dir==='L'?1:dir==='R'?-1:dir==='D'?cols:-cols);
@@ -879,144 +879,87 @@ jobs:
               if(document.activeElement===document.body||!document.activeElement){
                 var els=layerItems();if(els.length)els[0].focus()}},50)});
 
-          /* ================== تشغيل ================== */
+          (function () {
+            var api = {
+              reorder: function (items, index, step) {
+                var result = items.slice(), target = index + step;
+                if (index < 0 || index >= result.length || target < 0 || target >= result.length) return result;
+                var item = result[index]; result[index] = result[target]; result[target] = item;
+                return result;
+              },
+              restore: function (items, saved) {
+                var ids = Array.isArray(saved) ? saved : [], used = [], result = [];
+                ids.forEach(function (id) { items.forEach(function (item) { if (item.label === id && used.indexOf(id) < 0) { result.push(item); used.push(id); } }); });
+                items.forEach(function (item) { if (used.indexOf(item.label) < 0) result.push(item); });
+                return result;
+              }
+            };
+            if (typeof module !== 'undefined') module.exports = api;
+            if (typeof window === 'undefined' || !window.DOCK) return;
+            var originals = DOCK.slice(), selected = 0, bgIndex = 0, pendingBg = 0;
+            var savedBg = ld('shashaBackground'), automatic = savedBg === null || savedBg === 'auto';
+            try { DOCK = api.restore(DOCK, JSON.parse(ld('shashaOrder') || 'null')); } catch (e) {}
+            if (!automatic) { bgIndex = Math.max(0, Math.min(PHOTO_IDS.length - 1, Number(savedBg) || 0)); }
+            var css = document.createElement('style');
+            css.textContent = '.settings-sheet{width:80vw;overflow-y:auto}.settings-actions{display:flex;justify-content:center;gap:1vw;flex-wrap:wrap;margin:1.2vw 0}.settings-actions .btn{margin:0;font-size:1.35vw;border-radius:1vw}.settings-section{border-top:1px solid rgba(255,255,255,.2);padding:1vw 0}.settings-section h3{font-size:1.6vw;text-align:center}.settings-tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:.4vw;margin:1vw 0}.settings-tiles .btn{margin:0;padding:.55vw 1vw;font-size:1.2vw;border-radius:.8vw}.settings-tiles .selected{border-color:#fff;background:rgba(255,255,255,.4)}#settingsStatus{font-size:1.3vw;text-align:center;min-height:1.8vw}html,body{line-height:1.25}#time{letter-spacing:0}';
+            document.head.appendChild(css);
+            var overlay = document.createElement('div'); overlay.id = 'ovSettings'; overlay.className = 'ov';
+            overlay.innerHTML = '<div class="sheet glass settings-sheet"><h2>Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„ÙˆØ§Ø¬Ù‡Ø©</h2><div class="settings-actions"><button class="btn" data-f="1" id="reloadInterface">â†» ØªØ­Ø¯ÙŠØ« Ø§Ù„ÙˆØ§Ø¬Ù‡Ø©</button><button class="btn" data-f="1" id="systemSettings">âš™ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„ØªÙ„ÙØ§Ø²</button><button class="btn" data-f="1" id="closeSettings">Ø±Ø¬ÙˆØ¹</button></div><div class="settings-section"><h3>Ø§Ù„Ø®Ù„ÙÙŠØ©</h3><div class="settings-actions"><button class="btn" data-f="1" id="previousBackground">â†’ Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©</button><button class="btn" data-f="1" id="nextBackground">Ø§Ù„ØªØ§Ù„ÙŠØ© â†</button><button class="btn" data-f="1" id="autoBackground"></button></div></div><div class="settings-section"><h3>ØªØ±ØªÙŠØ¨ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª</h3><div class="settings-tiles" id="orderTiles"></div><div class="settings-actions"><button class="btn" data-f="1" id="moveRight">â†’ Ù†Ù‚Ù„ Ù„Ù„ÙŠÙ…ÙŠÙ†</button><button class="btn" data-f="1" id="moveLeft">Ù†Ù‚Ù„ Ù„Ù„ÙŠØ³Ø§Ø± â†</button><button class="btn" data-f="1" id="restoreOrder">Ø§Ø³ØªØ¹Ø§Ø¯Ø© Ø§Ù„ØªØ±ØªÙŠØ¨</button></div></div><div id="settingsStatus" role="status"></div></div>';
+            document.body.appendChild(overlay);
+            function status(text) { $('settingsStatus').textContent = text; }
+            function paintOrder() {
+              var box = $('orderTiles'); box.innerHTML = '';
+              DOCK.forEach(function (item, index) {
+                var b = document.createElement('button'); b.className = 'btn' + (index === selected ? ' selected' : '');
+                b.setAttribute('data-f', '1'); b.setAttribute('aria-pressed', String(index === selected)); b.textContent = item.label;
+                b.onclick = function () { selected = index; paintOrder(); box.children[index].focus(); };
+                box.appendChild(b);
+              });
+            }
+            function applyOrder(step) {
+              var next = selected + step;
+              if (next < 0 || next >= DOCK.length) { status('ÙˆØµÙ„Øª Ø¥Ù„Ù‰ Ø·Ø±Ù Ø§Ù„Ø´Ø±ÙŠØ·'); return; }
+              DOCK = api.reorder(DOCK, selected, step); selected = next;
+              sv('shashaOrder', JSON.stringify(DOCK.map(function (item) { return item.label; })));
+              buildDock(); paintOrder(); status('ØªÙ… Ø­ÙØ¸ ØªØ±ØªÙŠØ¨ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª');
+            }
+            var originalDock = buildDock;
+            buildDock = function () {
+              originalDock();
+              DOCK.forEach(function (item) { if (item.spec === 'settings' && item.el) item.el.onclick = function () { lastTile = item.el; paintOrder(); status(''); paintBackground(); showOv('ovSettings', $('reloadInterface')); }; });
+            };
+            function paintBackground() { $('autoBackground').textContent = automatic ? 'âœ“ ØªØºÙŠÙŠØ± ØªÙ„Ù‚Ø§Ø¦ÙŠ' : 'ØªØ´ØºÙŠÙ„ Ø§Ù„ØªØºÙŠÙŠØ± Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠ'; }
+            var originalStart = startBg;
+            function fixedBackground() {
+              var request = ++pendingBg;
+              clearTimeout(btimer); bnext = null;
+              var url = window.SHASHA_PREVIEW_BACKGROUNDS ? window.SHASHA_PREVIEW_BACKGROUNDS[bgIndex % window.SHASHA_PREVIEW_BACKGROUNDS.length] : 'https://images.unsplash.com/' + PHOTO_IDS[bgIndex] + '?auto=format&fit=crop&w=' + BG_W + '&h=' + BG_H + '&q=72';
+              loadImg(url, function (im) { if (request !== pendingBg) return; var next = bgLayers[1-bcur], old = bgLayers[bcur]; next.style.backgroundImage = 'url("' + im.src + '")'; next.classList.add('on'); old.classList.remove('on'); bcur = 1-bcur; }, function () { if (request === pendingBg) status('ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ø®Ù„ÙÙŠØ©Ø› Ø­Ø§ÙˆÙ„ Ø¹Ù†Ø¯ ØªÙˆÙØ± Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª'); });
+            }
+            startBg = function () { if (automatic) originalStart(); else fixedBackground(); };
+            function changeBackground(step) { automatic = false; bgIndex = (bgIndex + step + PHOTO_IDS.length) % PHOTO_IDS.length; sv('shashaBackground', String(bgIndex)); fixedBackground(); paintBackground(); status('ØªÙ… Ø­ÙØ¸ Ø§Ù„Ø®Ù„ÙÙŠØ©'); }
+            $('previousBackground').onclick = function () { changeBackground(-1); };
+            $('nextBackground').onclick = function () { changeBackground(1); };
+            $('autoBackground').onclick = function () { automatic = true; pendingBg++; sv('shashaBackground', 'auto'); clearTimeout(btimer); originalStart(); paintBackground(); status('ØªÙ… ØªØ´ØºÙŠÙ„ Ø§Ù„ØªØºÙŠÙŠØ± Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠ'); };
+            $('moveRight').onclick = function () { applyOrder(-1); };
+            $('moveLeft').onclick = function () { applyOrder(1); };
+            $('restoreOrder').onclick = function () { DOCK = originals.slice(); selected = 0; sv('shashaOrder', '[]'); buildDock(); paintOrder(); status('ØªÙ… Ø§Ø³ØªØ¹Ø§Ø¯Ø© Ø§Ù„ØªØ±ØªÙŠØ¨'); };
+            $('reloadInterface').onclick = function () { window.location.reload(); };
+            $('systemSettings').onclick = function () { L('settings'); };
+            $('closeSettings').onclick = closeOv;
+          })();
+
+          /* ================== ØªØ´ØºÙŠÙ„ ================== */
           buildDock();
           var f0=$('apps').firstChild;if(f0)f0.focus();
           tick();
           startBg();syncTime();prayer();weather();
           setInterval(tick,1000);setInterval(prayer,36e5);setInterval(weather,9e5);setInterval(syncTime,6e5);
-          /* تجهيز شبكة التطبيقات في وقت الفراغ لتفتح فوراً */
+          /* ØªØ¬Ù‡ÙŠØ² Ø´Ø¨ÙƒØ© Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª ÙÙŠ ÙˆÙ‚Øª Ø§Ù„ÙØ±Ø§Øº Ù„ØªÙØªØ­ ÙÙˆØ±Ø§Ù‹ */
           setTimeout(function(){if(!appsBuilt)buildApps()},3000);
           </script></body></html>
           EOF
           sed -i "s/__BUILD_TS__/$(date +%s)000/" app/src/main/assets/index.html
-      - name: Add TV features (settings + quran/adhan)
-        run: |
-          cat > app/src/main/assets/extra.js <<'EOF'
-          (function(){
-          var CITIES=[['الرياض',24.71,46.68],['جدة',21.54,39.17],['مكة',21.42,39.83],['المدينة',24.47,39.61],['الدمام',26.43,50.10],['القريات',31.33,37.34]];
-          var MUEZ=[]; /* مؤذنون إضافيون: ['الاسم','https://رابط.mp3'] */
-          var CFG={};try{CFG=JSON.parse(ld('cfg')||'{}')}catch(e){}
-          [['c',5],['po',0],['st',1],['oc',1],['bg',45],['ad',0]].forEach(function(d){if(CFG[d[0]]==null)CFG[d[0]]=d[1]});
-          function save(){sv('cfg',JSON.stringify(CFG))}
-          function cyc(k,a){CFG[k]=a[(a.indexOf(CFG[k])+1)%a.length]}
-
-          var st=document.createElement('style');
-          st.textContent='.t{width:7vw;margin:0 .45vw}.ic{width:6.2vw;height:6.2vw}.lb{max-width:7vw;font-size:1.2vw}'
-          +'.row{display:flex;justify-content:space-between;align-items:center;width:46vw;margin:.45vw auto;padding:.9vw 1.6vw;border-radius:1.6vw;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);font-size:1.7vw;outline:none;cursor:pointer;text-align:right;transition:transform .12s}'
-          +'.row b{opacity:.85;font-weight:500;margin-right:1vw}.row:focus{background:rgba(255,255,255,.36);border-color:#fff;transform:scale(1.03)}.row.act{background:rgba(255,210,122,.3)}'
-          +'#qt{display:flex;justify-content:center;margin-bottom:1vw}#qt .row{width:auto;margin:0 .4vw;font-size:1.5vw}'
-          +'#qb{display:grid;grid-template-columns:repeat(3,1fr);grid-gap:.2vw .6vw;width:78vw;max-height:52vh;overflow-y:auto;scrollbar-width:none}#qb::-webkit-scrollbar{display:none}'
-          +'#qb .row{width:auto;font-size:1.45vw;margin:.25vw 0}#qb .sm{grid-column:1/-1;text-align:center}#qnow{min-height:2vw;color:#ffd27a;font-size:1.4vw;text-align:center;margin-bottom:.6vw}';
-          document.head.appendChild(st);
-
-          document.body.insertAdjacentHTML('beforeend',
-           '<div class="ov" id="ovSet"><div class="sheet glass"><h2>تلفزيونك</h2><p>اضغط على أي خيار لتغييره</p><div id="sb"></div><div class="hint">زر الرجوع للإغلاق</div></div></div>'
-          +'<div class="ov" id="ovQ"><div class="sheet glass"><h2>تلاوة وأذان</h2><p>القرآن الكريم بلا إعلانات</p><div id="qnow"></div>'
-          +'<div id="qt"><button class="row" data-f="1" data-t="r">القرّاء</button><button class="row" data-f="1" data-t="d">الإذاعات</button><button class="row" data-f="1" data-t="a">الأذان</button><button class="row" data-f="1" id="qs">⏹ إيقاف</button></div>'
-          +'<div id="qb"></div></div></div>');
-          $('tsrc').insertAdjacentHTML('afterend','<div id="occ" class="sm" style="margin-top:.5vw"></div>');
-
-          var _at=at,_f=f12;
-          at=function(s,a){var d=_at(s,a);d.setUTCMinutes(d.getUTCMinutes()+(CFG.po||0));return d};
-          f12=function(s){var p=String(s).slice(0,5).split(':'),m=((+p[0])*60+(+p[1])+(CFG.po||0)+1440)%1440;return _f(z(Math.floor(m/60))+':'+z(m%60))};
-
-          function occ(){
-            var e=$('occ');if(!CFG.oc){e.textContent='';return}
-            var w=wall(),y=w.getUTCFullYear(),t0=Date.UTC(y,w.getUTCMonth(),w.getUTCDate()),b=null;
-            [['اليوم الوطني',8,23],['يوم التأسيس',1,22],['يوم العلم',2,11]].forEach(function(o){
-              var t=Date.UTC(y,o[1],o[2]);if(t<t0)t=Date.UTC(y+1,o[1],o[2]);
-              var n=Math.round((t-t0)/864e5);if(!b||n<b[1])b=[o[0],n]});
-            e.textContent=b[1]?b[0]+' بعد '+ar(b[1])+' يوم':'كل عام وأنتم بخير — '+b[0]}
-
-          function applyCity(){var c=CITIES[CFG.c];LAT=c[1];LON=c[2];CITY=c[0];$('city').textContent=CITY;sv('ptc','null');curDay='';cur='';tick();prayer();weather()}
-          function apply(){
-            document.querySelector('.strip').style.visibility=CFG.st?'visible':'hidden';
-            BG_SECONDS=CFG.bg;occ();cur='';tick()}
-
-          var SET=[
-            ['المدينة',function(){return CITIES[CFG.c][0]},function(){CFG.c=(CFG.c+1)%CITIES.length;applyCity()}],
-            ['تعديل وقت الصلاة',function(){return (CFG.po>0?'+':'')+ar(CFG.po)+' دقيقة'},function(){CFG.po=CFG.po>=10?-10:CFG.po+1}],
-            ['شريط الصلاة تحت الساعة',function(){return CFG.st?'ظاهر':'مخفي'},function(){CFG.st=CFG.st?0:1}],
-            ['المناسبات الوطنية',function(){return CFG.oc?'تعمل':'متوقفة'},function(){CFG.oc=CFG.oc?0:1}],
-            ['تبديل الصورة كل',function(){return ar(CFG.bg)+' ثانية'},function(){cyc('bg',[15,30,45,60,120])}],
-            ['الأذان التلقائي',function(){return CFG.ad?'يعمل':'متوقف'},function(){CFG.ad=CFG.ad?0:1}]
-          ];
-          function renderSet(k){
-            var b=$('sb');b.innerHTML='';
-            SET.forEach(function(s,i){
-              var r=document.createElement('button');r.className='row';r.setAttribute('data-f','1');
-              r.innerHTML='<span>'+s[0]+'</span><b>'+esc(s[1]())+'</b>';
-              r.onclick=function(){s[2]();save();apply();renderSet(i)};b.appendChild(r)});
-            b.children[k||0].focus()}
-          function openSet(){showOv('ovSet');renderSet(0)}
-
-          var au=new Audio(),curU='',C={},Q={v:'r'};
-          function play(u,n){
-            if(curU===u&&!au.paused){au.pause();return}
-            curU=u;au.src=u;var p=au.play();if(p&&p.catch)p.catch(function(){});
-            $('qnow').textContent='▶ '+n}
-          $('qs').onclick=function(){au.pause();curU='';$('qnow').textContent=''};
-          function get(k,u,cb){
-            if(C[k])return cb(C[k]);
-            fetch(u).then(function(r){return r.json()}).then(function(j){C[k]=j;cb(j)})
-            .catch(function(){$('qb').innerHTML='<div class="sm">تعذر التحميل — تحقق من الإنترنت</div>'})}
-          function list(items){
-            var b=$('qb'),fr=document.createDocumentFragment();b.innerHTML='';b.scrollTop=0;
-            items.forEach(function(it){
-              var r=document.createElement('button');r.className='row';r.setAttribute('data-f','1');
-              r.innerHTML='<span>'+esc(it[0])+'</span>';r.onclick=it[1];fr.appendChild(r)});
-            b.appendChild(fr);if(b.firstChild)b.firstChild.focus()}
-          var W=['السديس','الشريم','المعيقلي','العفاسي','الحذيفي','الغامدي','الدوسري','القطامي','الحصري','المنشاوي','عبد الباسط','ماهر','الشاطري','البدير','العجمي'];
-          function https(a){return (a||[]).filter(function(x){return /^https:/.test(x.url||x.server||'')})}
-          function surahs(r){
-            Q.v='sur';var m=r.moshaf[0];
-            get('sw','https://mp3quran.net/api/v3/suwar?language=ar',function(s){
-              var nm={};s.suwar.forEach(function(x){nm[x.id]=x.name});
-              list(m.surah_list.split(',').map(function(id){
-                return[ar(id)+'. '+nm[id],function(){play(m.server+('00'+id).slice(-3)+'.mp3',r.name+' — '+nm[id])}]}))})}
-          function tab(t){
-            Q.v=t;[].forEach.call(document.querySelectorAll('#qt [data-t]'),function(e){e.classList.toggle('act',e.getAttribute('data-t')===t)});
-            $('qb').innerHTML='<div class="sm">جارٍ التحميل…</div>';
-            if(t==='r')get('rec','https://mp3quran.net/api/v3/reciters?language=ar',function(j){
-              var a=https(j.reciters.map(function(r){r.server=(r.moshaf[0]||{}).server;return r})).filter(function(r){return W.some(function(w){return r.name.indexOf(w)>=0})}).slice(0,30);
-              list(a.map(function(r){return[r.name,function(){surahs(r)}]}))});
-            else if(t==='d')get('rad','https://mp3quran.net/api/v3/radios?language=ar',function(j){
-              list(https(j.radios).slice(0,45).map(function(r){return[r.name,function(){play(r.url,r.name)}]}))});
-            else get('rad','https://mp3quran.net/api/v3/radios?language=ar',function(j){
-              var m=MUEZ.concat(https(j.radios).filter(function(r){return /[أا]ذان/.test(r.name)}).map(function(r){return[r.name,r.url]}));
-              var it=[['الأذان التلقائي: '+(CFG.ad?'يعمل':'متوقف'),function(){CFG.ad=CFG.ad?0:1;save();tab('a')}]];
-              m.forEach(function(x){it.push([(CFG.mu===x[1]?'✓ ':'')+x[0],function(){CFG.mu=x[1];save();play(x[1],x[0]);tab('a')}])});
-              if(!m.length)it.push(['لا توجد أصوات أذان — أضف روابط في MUEZ',function(){}]);
-              list(it)})}
-          [].forEach.call(document.querySelectorAll('#qt [data-t]'),function(e){e.onclick=function(){tab(e.getAttribute('data-t'))}});
-          function openQ(){showOv('ovQ',document.querySelector('#qt [data-t]'));tab('r')}
-          var _b=onBackKey;
-          onBackKey=function(){if(openOvEl&&openOvEl.id==='ovQ'&&Q.v==='sur'){tab('r');return true}return _b()};
-
-          var pa=null;
-          setInterval(function(){
-            if(lastAd&&lastAd!==pa){pa=lastAd;if(CFG.ad&&CFG.mu)play(CFG.mu,'أذان '+lastAd)}
-            if(!lastAd)pa=null},1000);
-
-          var QS='<svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.3A7 7 0 0 1 15.5 3.5z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>';
-          var TS='<svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="2" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M8 20h8M12 16.5V20" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>';
-          function tile(l,svg,fn){var o={label:l,svg:svg},b=mkTile(o,fn);setTile(b,o);return b}
-          var dk=$('apps'),hd=dk.children[5];
-          dk.insertBefore(tile('تلاوة وأذان',QS,openQ),hd);
-          dk.insertBefore(tile('تلفزيونك',TS,openSet),hd);
-
-          apply();if(CFG.c!==5)applyCity();
-          setInterval(occ,6e4);
-          })();
-          EOF
-          sed -i 's#</body>#<script src="extra.js"></script></body>#' app/src/main/assets/index.html
-      - name: Apply new design
-        run: |
-          cp ui/index.html app/src/main/assets/index.html
-          sed -i "s/__BUILD_TS__/$(date +%s)000/" app/src/main/assets/index.html
-          cp adhan.mp3 app/src/main/assets/adhan.mp3 || echo "no adhan file"
-
       - uses: actions/cache@v4
         with:
           path: ~/.android/debug.keystore
